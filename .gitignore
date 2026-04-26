@@ -30,3 +30,8 @@ layout.json
 
 # Internal session handoff notes (not for public repo)
 HANDOFF-STEP*.md
+HANDOFF-INSTALLER-FIX.md
+
+# Build artifacts and installer output
+.artifacts/
+installer-output/

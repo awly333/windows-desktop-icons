@@ -4,11 +4,27 @@
 ;   - Install directory
 ;   - Whether to create a desktop shortcut
 
-#define MyAppName       "Desktop Icons"
-#define MyAppVersion    "0.1.0"
-#define MyAppPublisher  "Desktop Icons"
-#define MyAppExeName    "DesktopIcons.App.exe"
-#define MyPublishDir    "..\publish\app"
+#ifndef MyAppName
+  #define MyAppName       "Desktop Icons"
+#endif
+#ifndef MyAppVersion
+  #define MyAppVersion    "0.1.0"
+#endif
+#ifndef MyAppPublisher
+  #define MyAppPublisher  "Desktop Icons"
+#endif
+#ifndef MyAppExeName
+  #define MyAppExeName    "DesktopIcons.App.exe"
+#endif
+#ifndef MyPublishDir
+  #define MyPublishDir    "..\publish\app"
+#endif
+#ifndef MyOutputDir
+  #define MyOutputDir     "..\publish\installer"
+#endif
+#ifndef MyOutputBaseFilename
+  #define MyOutputBaseFilename "DesktopIcons-Setup-" + MyAppVersion
+#endif
 
 [Setup]
 ; Stable AppId — do not change between releases (used to match upgrades).
@@ -31,8 +47,8 @@ PrivilegesRequiredOverridesAllowed=dialog commandline
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 
-OutputDir=..\publish\installer
-OutputBaseFilename=DesktopIcons-Setup-{#MyAppVersion}
+OutputDir={#MyOutputDir}
+OutputBaseFilename={#MyOutputBaseFilename}
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
@@ -55,11 +71,11 @@ Name: "desktopicon"; Description: "Create a &desktop shortcut"; GroupDescription
 Source: "{#MyPublishDir}\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs ignoreversion
 
 [Icons]
-Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "Launch {#MyAppName}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Description: "Launch {#MyAppName}"; Flags: nowait postinstall skipifsilent
 
 [UninstallRun]
 ; Remove auto-start registry value if the user enabled it from inside the app.
