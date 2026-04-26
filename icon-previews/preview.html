@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>DesktopIcons — Icon Concepts</title>
+<style>
+  :root {
+    --ink: #1d1d1f;
+    --muted: #6e6e73;
+    --light: #f5f5f7;
+    --border: #d2d2d7;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    padding: 56px 64px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  h1 {
+    font-family: -apple-system, "SF Pro Display", "Segoe UI", sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+    margin: 0 0 8px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 17px;
+    margin: 0;
+    max-width: 640px;
+    line-height: 1.47;
+  }
+  .concept {
+    padding: 48px 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .concept h2 {
+    font-family: -apple-system, "SF Pro Display", "Segoe UI", sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    margin: 0 0 6px;
+  }
+  .concept .desc {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 28px;
+    max-width: 640px;
+  }
+  .row {
+    display: flex;
+    gap: 32px;
+    align-items: flex-end;
+    padding: 24px 28px;
+    border-radius: 18px;
+    margin-bottom: 16px;
+  }
+  .row.light { background: #ffffff; border: 1px solid var(--border); }
+  .row.gray  { background: var(--light); }
+  .row.dark  { background: #1f1f1f; }
+  .row.dark .label { color: #a1a1a6; }
+  .cell {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .cell img {
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  .label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .row-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 8px 4px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  footer {
+    padding: 40px 64px 80px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DesktopIcons — Icon Concepts</h1>
+  <p>Four candidates rendered at app, taskbar, and tray sizes. Each shown on white, light gray, and dark backgrounds so tray legibility under both Windows themes is visible.</p>
+</header>
+
+<section class="concept">
+  <h2>A &middot; Grid Pin</h2>
+  <p class="desc">3×3 rounded cells, center cell active in Apple Action Blue. Reads as “a desktop icon grid with one position locked.”</p>
+
+  <p class="row-label">Light</p>
+  <div class="row light">
+    <div class="cell"><img src="a-grid.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="a-grid.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="a-grid.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="a-grid.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="a-grid.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+  <p class="row-label">Gray</p>
+  <div class="row gray">
+    <div class="cell"><img src="a-grid.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="a-grid.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="a-grid.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="a-grid.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="a-grid.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+  <p class="row-label">Dark</p>
+  <div class="row dark">
+    <div class="cell"><img src="a-grid.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="a-grid.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="a-grid.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="a-grid.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="a-grid.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+</section>
+
+<section class="concept">
+  <h2>B &middot; Monitor &amp; Snapshot</h2>
+  <p class="desc">Graphite display with three blue dots inside, mirroring the in-app LayoutPreviewCanvas (monitor frame + icon dots). Brand-internal continuity.</p>
+
+  <p class="row-label">Light</p>
+  <div class="row light">
+    <div class="cell"><img src="b-monitor.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+  <p class="row-label">Gray</p>
+  <div class="row gray">
+    <div class="cell"><img src="b-monitor.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+  <p class="row-label">Dark</p>
+  <div class="row dark">
+    <div class="cell"><img src="b-monitor.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="b-monitor.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+</section>
+
+<section class="concept">
+  <h2>C &middot; Stacked Layouts</h2>
+  <p class="desc">Three offset rounded cards (light → mid gray → graphite). Top card carries three blue position dots = the active layout. Tells the “library of named layouts” story.</p>
+
+  <p class="row-label">Light</p>
+  <div class="row light">
+    <div class="cell"><img src="c-stack.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="c-stack.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="c-stack.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="c-stack.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="c-stack.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+  <p class="row-label">Gray</p>
+  <div class="row gray">
+    <div class="cell"><img src="c-stack.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="c-stack.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="c-stack.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="c-stack.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="c-stack.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+  <p class="row-label">Dark</p>
+  <div class="row dark">
+    <div class="cell"><img src="c-stack.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="c-stack.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="c-stack.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="c-stack.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="c-stack.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+</section>
+
+<section class="concept">
+  <h2>D &middot; Anchor Dot</h2>
+  <p class="desc">Blue bullseye with a white ring and a blue core — a “pinned position” mark. Maximum legibility at any size; strongest tray candidate.</p>
+
+  <p class="row-label">Light</p>
+  <div class="row light">
+    <div class="cell"><img src="d-anchor.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+  <p class="row-label">Gray</p>
+  <div class="row gray">
+    <div class="cell"><img src="d-anchor.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+  <p class="row-label">Dark</p>
+  <div class="row dark">
+    <div class="cell"><img src="d-anchor.svg" width="256" height="256"/><span class="label">256</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="64"  height="64"/><span class="label">64</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="32"  height="32"/><span class="label">32</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="24"  height="24"/><span class="label">24</span></div>
+    <div class="cell"><img src="d-anchor.svg" width="16"  height="16"/><span class="label">16</span></div>
+  </div>
+</section>
+
+<footer>
+  Palette: <code>#0071e3</code> · <code>#2997ff</code> · <code>#1d1d1f</code> · <code>#86868b</code> · <code>#d2d2d7</code> · <code>#f5f5f7</code> · <code>#ffffff</code>. SVG sources in this folder.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+# .NET build output
+bin/
+obj/
+*.user
+*.suo
+
+# Visual Studio / Rider
+.vs/
+.idea/
+
+# Publish + installer output
+publish/
+
+# Test output
+TestResults/
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Claude Code local config
+.claude/
+
+# Local working data (not part of the project)
+test*.json
+layout.json
+
+# Internal session handoff notes (not for public repo)
+HANDOFF-STEP*.md
