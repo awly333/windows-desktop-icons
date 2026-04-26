@@ -1,5 +1,7 @@
 # Desktop Icons
 
+[简体中文](README.zh-CN.md)
+
 A small Windows utility that saves and restores desktop icon layouts per monitor configuration. Open-source replacement for ReIcon, with an Apple-style minimal interface.
 
 ## Features
@@ -12,12 +14,12 @@ A small Windows utility that saves and restores desktop icon layouts per monitor
 
 ## Requirements
 
-- Windows 10 1809 or later, x64
+- Windows 10 21H1 (build 19041) or later, x64
 - No need to install .NET separately — the installer is self-contained
 
 ## Install
 
-Download the latest `DesktopIcons-Setup-x.y.z.exe` from the [Releases page](#) and run it.
+Download the latest `DesktopIcons-Setup-x.y.z.exe` from the [Releases page](https://github.com/awly333/windows-desktop-icons/releases) and run it.
 
 The installer asks where to put the app:
 
@@ -41,7 +43,7 @@ dotnet build src\DesktopIcons.App\DesktopIcons.App.csproj -c Debug
 
 # Build installer
 powershell.exe -ExecutionPolicy Bypass -File tools\build-installer.ps1
-# Output: publish\installer\DesktopIcons-Setup-x.y.z.exe
+# Output: installer-output\DesktopIcons-Setup-x.y.z.exe
 ```
 
 ## Project layout
