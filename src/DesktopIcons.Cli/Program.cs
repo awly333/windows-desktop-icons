@@ -29,7 +29,7 @@ internal static class Program
 
         if (verb is "--version" or "-v")
         {
-            Console.WriteLine("0.1.0");
+            Console.WriteLine("0.1.1");
             return 0;
         }
 

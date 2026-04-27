@@ -12,7 +12,7 @@
     <AssemblyName>DesktopIcons.Cli</AssemblyName>
     <LangVersion>latest</LangVersion>
     <InvariantGlobalization>true</InvariantGlobalization>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <!-- Single-file publish settings (used by tools/build-cli.ps1) -->
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>

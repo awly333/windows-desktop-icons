@@ -70,7 +70,7 @@ Write-Host "Compiling installer..."
 & $iscc `
     "/DMyPublishDir=$pub" `
     "/DMyOutputDir=$out" `
-    "/DMyOutputBaseFilename=DesktopIcons-Setup-0.1.0" `
+    "/DMyOutputBaseFilename=DesktopIcons-Setup-0.1.1" `
     $iss
 if ($LASTEXITCODE -ne 0) {
     Write-Error "ISCC failed (exit $LASTEXITCODE)"
