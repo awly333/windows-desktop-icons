@@ -1,0 +1,23 @@
+{
+  "version": "0.1.0",
+  "description": "Save and restore Windows desktop icon layouts per monitor configuration.",
+  "homepage": "https://github.com/awly333/windows-desktop-icons",
+  "license": "MIT",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/awly333/windows-desktop-icons/releases/download/v0.1.0/DesktopIcons-CLI-0.1.0.exe",
+      "hash": "17227a62ea049c0a1690f001b4f57518538567983096b97c566545a4b23cf214",
+      "bin": [["DesktopIcons-CLI-0.1.0.exe", "di"]]
+    }
+  },
+  "checkver": {
+    "github": "https://github.com/awly333/windows-desktop-icons"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/awly333/windows-desktop-icons/releases/download/v$version/DesktopIcons-CLI-$version.exe"
+      }
+    }
+  }
+}

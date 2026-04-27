@@ -35,3 +35,4 @@ HANDOFF-INSTALLER-FIX.md
 # Build artifacts and installer output
 .artifacts/
 installer-output/
+cli-output/

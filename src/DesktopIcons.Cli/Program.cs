@@ -27,6 +27,12 @@ internal static class Program
 
         var verb = args[0].ToLowerInvariant();
 
+        if (verb is "--version" or "-v")
+        {
+            Console.WriteLine("0.1.0");
+            return 0;
+        }
+
         try
         {
             return verb switch
@@ -288,11 +294,12 @@ internal static class Program
     private static void PrintUsage()
     {
         Console.Error.WriteLine("usage:");
-        Console.Error.WriteLine("  DesktopIcons.Cli save    <name>     save current desktop as a named layout");
-        Console.Error.WriteLine("  DesktopIcons.Cli restore <name>     apply a named layout");
-        Console.Error.WriteLine("  DesktopIcons.Cli list    [--all]    list layouts (--all: across all monitor configs)");
-        Console.Error.WriteLine("  DesktopIcons.Cli delete  <name>     delete a named layout");
-        Console.Error.WriteLine("  DesktopIcons.Cli dump    <path>     dump current desktop to a specific json file");
-        Console.Error.WriteLine("  DesktopIcons.Cli apply   <path>     apply from a specific json file");
+        Console.Error.WriteLine("  di save    <name>       save current desktop as a named layout");
+        Console.Error.WriteLine("  di restore <name>       restore a saved layout");
+        Console.Error.WriteLine("  di list    [--all]      list layouts (--all: all monitor configs)");
+        Console.Error.WriteLine("  di delete  <name>       delete a layout");
+        Console.Error.WriteLine("  di dump    <path>       dump current desktop to a json file");
+        Console.Error.WriteLine("  di apply   <path>       apply layout from a json file");
+        Console.Error.WriteLine("  di --version            print version");
     }
 }

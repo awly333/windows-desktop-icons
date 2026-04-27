@@ -55,6 +55,36 @@ installer\             # Inno Setup 脚本
 tools\                 # build-icon.ps1、build-installer.ps1
 ```
 
+## CLI 命令行工具
+
+除图形界面外，还提供独立的命令行工具。
+
+**通过 Scoop 安装（无需管理员权限）：**
+
+```powershell
+scoop install https://raw.githubusercontent.com/awly333/windows-desktop-icons/main/scoop/desktop-icons.json
+```
+
+**命令列表：**
+
+```
+di save <名称>        保存当前桌面布局
+di restore <名称>     还原已保存的布局
+di list               列出当前显示器配置下的所有布局
+di list --all         列出所有显示器配置下的布局
+di delete <名称>      删除一个布局
+di --version          显示版本号
+```
+
+布局名称可以包含任意字符（支持空格）。布局按显示器配置隔离存储，切换显示器配置不会互相干扰。
+
+**高级用法：**
+
+```
+di dump <路径>        将当前布局导出到指定 JSON 文件
+di apply <路径>       从指定 JSON 文件还原布局
+```
+
 ## 许可证
 
 MIT — 详见 [LICENSE](LICENSE)。

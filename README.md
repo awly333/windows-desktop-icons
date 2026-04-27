@@ -57,6 +57,36 @@ installer\             # Inno Setup script
 tools\                 # build-icon.ps1, build-installer.ps1
 ```
 
+## CLI
+
+A standalone command-line tool is available alongside the GUI app.
+
+**Install via Scoop (no admin required):**
+
+```powershell
+scoop install https://raw.githubusercontent.com/awly333/windows-desktop-icons/main/scoop/desktop-icons.json
+```
+
+**Commands:**
+
+```
+di save <name>        Save the current desktop layout
+di restore <name>     Restore a saved layout
+di list               List saved layouts for the current monitor config
+di list --all         List layouts across all monitor configs
+di delete <name>      Delete a layout
+di --version          Print version
+```
+
+Layout names can be anything (spaces allowed). Layouts are stored per monitor configuration — switching setups keeps each config's layouts isolated.
+
+**Advanced:**
+
+```
+di dump <path>        Export current layout to a specific JSON file
+di apply <path>       Apply layout from a specific JSON file
+```
+
 ## License
 
 MIT — see [LICENSE](LICENSE).

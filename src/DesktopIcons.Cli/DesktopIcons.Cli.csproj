@@ -12,6 +12,12 @@
     <AssemblyName>DesktopIcons.Cli</AssemblyName>
     <LangVersion>latest</LangVersion>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <Version>0.1.0</Version>
+    <!-- Single-file publish settings (used by tools/build-cli.ps1) -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishReadyToRun>true</PublishReadyToRun>
   </PropertyGroup>
 
   <ItemGroup>
