@@ -177,8 +177,8 @@
                     <ToggleMenuFlyoutItem Text="Close to tray"
                                           IsChecked="{x:Bind Settings.CloseToTray, Mode=OneWay}"
                                           Command="{x:Bind ToggleCloseToTrayCommand}" />
-                    <ToggleMenuFlyoutItem Text="Auto-restore on display change"
-                                          IsChecked="{x:Bind Settings.AutoRestoreOnDisplayChange, Mode=OneWay}"
+                    <ToggleMenuFlyoutItem Text="Auto-restore when icons move"
+                                          IsChecked="{x:Bind Settings.AutoRestoreWhenIconsMove, Mode=OneWay}"
                                           Command="{x:Bind ToggleAutoRestoreCommand}" />
                     <MenuFlyoutSeparator />
                     <MenuFlyoutItem Text="Quit" Command="{x:Bind QuitCommand}" />

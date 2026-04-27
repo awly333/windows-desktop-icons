@@ -42,7 +42,7 @@ public partial class App : Application
         StartupLog.Write("Application.UnhandledException", e.Exception);
     }
 
-    private void OnCurrentDomainUnhandledException(object? sender, UnhandledExceptionEventArgs e)
+    private void OnCurrentDomainUnhandledException(object? sender, System.UnhandledExceptionEventArgs e)
     {
         if (e.ExceptionObject is Exception ex)
         {

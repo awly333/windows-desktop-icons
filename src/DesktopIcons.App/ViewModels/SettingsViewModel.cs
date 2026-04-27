@@ -15,7 +15,7 @@ public sealed partial class SettingsViewModel : ObservableObject
         _suspendSave = true;
         StartWithWindows = AutoStartService.IsEnabled();
         CloseToTray = _settings.CloseToTray;
-        AutoRestoreOnDisplayChange = _settings.AutoRestoreOnDisplayChange;
+        AutoRestoreWhenIconsMove = _settings.AutoRestoreWhenIconsMove;
         _suspendSave = false;
 
         if (_settings.StartWithWindows != StartWithWindows)
@@ -34,7 +34,7 @@ public sealed partial class SettingsViewModel : ObservableObject
     private bool _closeToTray;
 
     [ObservableProperty]
-    private bool _autoRestoreOnDisplayChange;
+    private bool _autoRestoreWhenIconsMove;
 
     partial void OnStartWithWindowsChanged(bool value)
     {
@@ -49,9 +49,9 @@ public sealed partial class SettingsViewModel : ObservableObject
         Persist();
     }
 
-    partial void OnAutoRestoreOnDisplayChangeChanged(bool value)
+    partial void OnAutoRestoreWhenIconsMoveChanged(bool value)
     {
-        _settings.AutoRestoreOnDisplayChange = value;
+        _settings.AutoRestoreWhenIconsMove = value;
         Persist();
     }
 
@@ -60,6 +60,28 @@ public sealed partial class SettingsViewModel : ObservableObject
         if (string.IsNullOrEmpty(fingerprint) || string.IsNullOrEmpty(name)) return;
         _settings.LastLayoutByFingerprint[fingerprint] = name;
         Persist();
+    }
+
+    public void RenameRecordedLayout(string fingerprint, string oldName, string newName)
+    {
+        if (string.IsNullOrEmpty(fingerprint) || string.IsNullOrEmpty(oldName) || string.IsNullOrEmpty(newName)) return;
+        if (_settings.LastLayoutByFingerprint.TryGetValue(fingerprint, out var current) &&
+            string.Equals(current, oldName, StringComparison.OrdinalIgnoreCase))
+        {
+            _settings.LastLayoutByFingerprint[fingerprint] = newName;
+            Persist();
+        }
+    }
+
+    public void RemoveRecordedLayout(string fingerprint, string name)
+    {
+        if (string.IsNullOrEmpty(fingerprint) || string.IsNullOrEmpty(name)) return;
+        if (_settings.LastLayoutByFingerprint.TryGetValue(fingerprint, out var current) &&
+            string.Equals(current, name, StringComparison.OrdinalIgnoreCase))
+        {
+            _settings.LastLayoutByFingerprint.Remove(fingerprint);
+            Persist();
+        }
     }
 
     private void Persist()

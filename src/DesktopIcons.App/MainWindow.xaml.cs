@@ -37,7 +37,7 @@ public sealed partial class MainWindow : Window
         ToggleTrayCommand = new RelayCommand(ToggleMainWindow);
         ToggleStartWithWindowsCommand = new RelayCommand(() => Settings.StartWithWindows = !Settings.StartWithWindows);
         ToggleCloseToTrayCommand = new RelayCommand(() => Settings.CloseToTray = !Settings.CloseToTray);
-        ToggleAutoRestoreCommand = new RelayCommand(() => Settings.AutoRestoreOnDisplayChange = !Settings.AutoRestoreOnDisplayChange);
+        ToggleAutoRestoreCommand = new RelayCommand(() => Settings.AutoRestoreWhenIconsMove = !Settings.AutoRestoreWhenIconsMove);
         QuitCommand = new RelayCommand(QuitApp);
         InitializeComponent();
         Title = "Desktop Icons";
@@ -46,7 +46,7 @@ public sealed partial class MainWindow : Window
 
         ViewModel.LayoutRestored += OnLayoutRestored;
         _autoRestore = new AutoRestoreService(ViewModel.Service, () => Settings.Snapshot);
-        _autoRestore.SetEnabled(Settings.AutoRestoreOnDisplayChange);
+        _autoRestore.SetEnabled(Settings.AutoRestoreWhenIconsMove);
         Settings.PropertyChanged += OnSettingsChanged;
 
         _ = ViewModel.InitializeAsync();
@@ -59,9 +59,9 @@ public sealed partial class MainWindow : Window
 
     private void OnSettingsChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(SettingsViewModel.AutoRestoreOnDisplayChange))
+        if (e.PropertyName == nameof(SettingsViewModel.AutoRestoreWhenIconsMove))
         {
-            _autoRestore.SetEnabled(Settings.AutoRestoreOnDisplayChange);
+            _autoRestore.SetEnabled(Settings.AutoRestoreWhenIconsMove);
         }
     }
 
@@ -219,6 +219,10 @@ public sealed partial class MainWindow : Window
             if (r == ContentDialogResult.Primary)
             {
                 await ViewModel.DeleteCommand.ExecuteAsync(item);
+                if (!NameExists(item.Name))
+                {
+                    Settings.RemoveRecordedLayout(item.Fingerprint, item.Name);
+                }
             }
         }
     }
@@ -235,11 +239,16 @@ public sealed partial class MainWindow : Window
             if (r != ContentDialogResult.Primary) return;
 
             var newName = dialog.EnteredName;
+            var oldName = item.Name;
             var isOtherDuplicate = ViewModel.Layouts.Any(
                 l => !ReferenceEquals(l, item) &&
                      string.Equals(l.Name, newName, StringComparison.OrdinalIgnoreCase));
             if (isOtherDuplicate && !await ConfirmOverwriteAsync(newName)) return;
             await ViewModel.RenameCommand.ExecuteAsync((item, newName));
+            if (!NameExists(oldName) && NameExists(newName))
+            {
+                Settings.RenameRecordedLayout(item.Fingerprint, oldName, newName);
+            }
         }
     }
 

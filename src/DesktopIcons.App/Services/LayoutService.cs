@@ -9,6 +9,8 @@ public sealed record FingerprintInfo(string Fingerprint, string Setup, string Di
 
 public sealed record RestoreResult(int Moved, int Total, int NotFound, List<string> Missing, bool AutoArrangeOn);
 
+public sealed record LayoutDriftResult(bool HasDrift, bool LayoutExists, bool AutoArrangeOn);
+
 public sealed class LayoutService
 {
     public Task<FingerprintInfo> GetCurrentFingerprintAsync() =>
@@ -78,6 +80,44 @@ public sealed class LayoutService
             var autoArrange = desktop.IsAutoArrange;
             var result = IconWriter.Apply(desktop, layout.Icons);
             return new RestoreResult(result.Moved, layout.Icons.Count, result.NotFound, result.MissingLabels.ToList(), autoArrange);
+        });
+
+    public Task<LayoutDriftResult> DetectDriftAsync(string fingerprint, string name, int tolerancePixels = 2) =>
+        Task.Run(() =>
+        {
+            var layout = LayoutStore.Load(fingerprint, name);
+            if (layout is null)
+            {
+                return new LayoutDriftResult(false, false, false);
+            }
+
+            using var desktop = DesktopListView.Open();
+            var autoArrange = desktop.IsAutoArrange;
+            if (autoArrange)
+            {
+                return new LayoutDriftResult(false, true, true);
+            }
+
+            var currentIcons = IconReader.ReadAll(desktop);
+            var currentByLabel = currentIcons
+                .GroupBy(icon => icon.Label, StringComparer.OrdinalIgnoreCase)
+                .ToDictionary(group => group.Key, group => group.First(), StringComparer.OrdinalIgnoreCase);
+
+            foreach (var savedIcon in layout.Icons)
+            {
+                if (!currentByLabel.TryGetValue(savedIcon.Label, out var currentIcon))
+                {
+                    continue;
+                }
+
+                if (Math.Abs(savedIcon.X - currentIcon.X) > tolerancePixels ||
+                    Math.Abs(savedIcon.Y - currentIcon.Y) > tolerancePixels)
+                {
+                    return new LayoutDriftResult(true, true, false);
+                }
+            }
+
+            return new LayoutDriftResult(false, true, false);
         });
 
     public Task<bool> DeleteAsync(string fingerprint, string name) =>

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace DesktopIcons.Core.Storage;
 
@@ -6,8 +7,23 @@ public sealed class AppSettings
 {
     public bool StartWithWindows { get; set; } = false;
     public bool CloseToTray { get; set; } = true;
-    public bool AutoRestoreOnDisplayChange { get; set; } = false;
+    public bool AutoRestoreWhenIconsMove { get; set; } = false;
+
+    [JsonPropertyName("autoRestoreOnDisplayChange")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? LegacyAutoRestoreOnDisplayChange { get; set; }
+
     public Dictionary<string, string> LastLayoutByFingerprint { get; set; } = new();
+
+    public void Normalize()
+    {
+        if (!AutoRestoreWhenIconsMove && LegacyAutoRestoreOnDisplayChange == true)
+        {
+            AutoRestoreWhenIconsMove = true;
+        }
+
+        LegacyAutoRestoreOnDisplayChange = null;
+    }
 }
 
 public static class SettingsStore
@@ -30,7 +46,9 @@ public static class SettingsStore
         {
             if (!File.Exists(SettingsPath)) return new AppSettings();
             var json = File.ReadAllText(SettingsPath);
-            return JsonSerializer.Deserialize<AppSettings>(json, JsonOpts) ?? new AppSettings();
+            var settings = JsonSerializer.Deserialize<AppSettings>(json, JsonOpts) ?? new AppSettings();
+            settings.Normalize();
+            return settings;
         }
         catch
         {
@@ -40,6 +58,7 @@ public static class SettingsStore
 
     public static void Save(AppSettings settings)
     {
+        settings.Normalize();
         var dir = Path.GetDirectoryName(SettingsPath)!;
         Directory.CreateDirectory(dir);
         File.WriteAllText(SettingsPath, JsonSerializer.Serialize(settings, JsonOpts));

@@ -10,12 +10,12 @@ A small Windows utility that saves and restores desktop icon layouts per monitor
 - Layouts are stored per monitor configuration (auto-detected display fingerprint)
 - System tray with quick controls
 - Optional **Start with Windows**
-- Optional **Auto-restore on display change** — re-applies the last layout when monitors are plugged/unplugged or resolution changes
+- Optional **Auto-restore when icons move** - re-applies the last restored layout when desktop icons drift from their saved positions
 
 ## Requirements
 
 - Windows 10 21H1 (build 19041) or later, x64
-- No need to install .NET separately — the installer is self-contained
+- No need to install .NET separately - the installer is self-contained
 
 ## Install
 
@@ -23,8 +23,8 @@ Download the latest `DesktopIcons-Setup-x.y.z.exe` from the [Releases page](http
 
 The installer asks where to put the app:
 
-- **Per-user** (default): `%LocalAppData%\Programs\Desktop Icons` — no admin required
-- **Per-machine**: `Program Files\Desktop Icons` — admin required
+- **Per-user** (default): `%LocalAppData%\Programs\Desktop Icons` - no admin required
+- **Per-machine**: `Program Files\Desktop Icons` - admin required
 
 You can change the install directory on the standard Inno Setup directory page.
 
@@ -48,7 +48,7 @@ powershell.exe -ExecutionPolicy Bypass -File tools\build-installer.ps1
 
 ## Project layout
 
-```
+```text
 src\
   DesktopIcons.Core\   # Shared library (desktop interop, fingerprint, storage)
   DesktopIcons.Cli\    # CLI: dump / apply / save / restore / list / delete
@@ -69,7 +69,7 @@ scoop install https://raw.githubusercontent.com/awly333/windows-desktop-icons/ma
 
 **Commands:**
 
-```
+```text
 di save <name>        Save the current desktop layout
 di restore <name>     Restore a saved layout
 di list               List saved layouts for the current monitor config
@@ -78,15 +78,15 @@ di delete <name>      Delete a layout
 di --version          Print version
 ```
 
-Layout names can be anything (spaces allowed). Layouts are stored per monitor configuration — switching setups keeps each config's layouts isolated.
+Layout names can be anything (spaces allowed). Layouts are stored per monitor configuration - switching setups keeps each config's layouts isolated.
 
 **Advanced:**
 
-```
+```text
 di dump <path>        Export current layout to a specific JSON file
 di apply <path>       Apply layout from a specific JSON file
 ```
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).
