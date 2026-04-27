@@ -2,7 +2,7 @@
 
 Windows 桌面图标布局管理工具，按显示器配置保存和还原图标位置。ReIcon 的开源替代品，界面简洁。
 
-[English README](README.md)
+[English](README.md)
 
 ## 功能
 
